@@ -24,6 +24,19 @@ const HomeScreen = ({ navigation }) => {
         }}
         title="Go to Image Demo"
       />
+      <Button
+        onPress={() => {
+          navigation.navigate("Counter");
+        }}
+        title="Go to Counter Demo"
+      />
+      <Button
+        onPress={() => {
+          navigation.navigate("Color");
+        }}
+        title="Go to Color Demo"
+      />
+
       {/* <TouchableOpacity
         onPress={() => {
           props.navigation.navigate("List");
