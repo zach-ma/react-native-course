@@ -26,9 +26,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#F0EEEE",
     height: 50,
     borderRadius: 10,
-    marginHorizontal: 30,
+    // marginHorizontal: 30,
     marginTop: 15,
     flexDirection: "row",
+    marginLeft: 10,
+    marginBottom: 10,
   },
 
   iconStyle: {
