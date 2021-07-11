@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 
 // create context object
 const BlogContext = React.createContext();
 
+const blogReducer = (state, action) => {
+  switch (action.type) {
+    case "add_blogpost":
+      return [...state, { title: `Blog Post #${state.length + 1}` }];
+    default:
+      return state;
+  }
+};
+
 // NOTE provider allows to share some value directly to some deeply nested child
 export const BlogProvider = ({ children }) => {
-  const [blogPosts, setBlogPosts] = useState([]); // set state
+  const [blogPosts, dispatch] = useReducer(blogReducer, []); // reducer func, initial state
+
   const addBlogPost = () => {
-    setBlogPosts([
-      ...blogPosts,
-      { title: `Blog Post #${blogPosts.length + 1}` },
-    ]);
+    dispatch({ type: "add_blogpost" });
   };
-  const editBlogPost = () => {};
-  const deleteBlogPost = () => {};
 
   return (
     <BlogContext.Provider value={{ data: blogPosts, addBlogPost }}>
