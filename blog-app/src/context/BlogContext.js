@@ -1,7 +1,4 @@
-import React, { useReducer } from "react";
-
-// create context object
-const BlogContext = React.createContext();
+import createDataContext from "./createDataContext";
 
 const blogReducer = (state, action) => {
   switch (action.type) {
@@ -12,19 +9,14 @@ const blogReducer = (state, action) => {
   }
 };
 
-// NOTE provider allows to share some value directly to some deeply nested child
-export const BlogProvider = ({ children }) => {
-  const [blogPosts, dispatch] = useReducer(blogReducer, []); // reducer func, initial state
-
-  const addBlogPost = () => {
+const addBlogPost = (dispatch) => {
+  return () => {
     dispatch({ type: "add_blogpost" });
   };
-
-  return (
-    <BlogContext.Provider value={{ data: blogPosts, addBlogPost }}>
-      {children}
-    </BlogContext.Provider>
-  );
 };
 
-export default BlogContext;
+export const { Context, Provider } = createDataContext(
+  blogReducer,
+  { addBlogPost },
+  []
+);
