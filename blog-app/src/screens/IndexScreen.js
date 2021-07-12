@@ -14,11 +14,10 @@ import { Feather } from "@expo/vector-icons";
 const IndexScreen = ({ navigation }) => {
   //   console.log(navigation);
 
-  const { state, addBlogPost, deleteBlogPost } = useContext(Context); // access the value from context
+  const { state, deleteBlogPost } = useContext(Context); // access the value from context
 
   return (
     <View>
-      <Button title="Add Post" onPress={addBlogPost} />
       <FlatList
         data={state}
         keyExtractor={(blogPost) => blogPost.title}
