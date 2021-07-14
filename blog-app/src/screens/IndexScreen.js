@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,9 +12,21 @@ import { Context, Provider } from "../context/BlogContext";
 import { Feather } from "@expo/vector-icons";
 
 const IndexScreen = ({ navigation }) => {
-  //   console.log(navigation);
+  const { state, deleteBlogPost, getBlogPosts } = useContext(Context); // access the value from context
 
-  const { state, deleteBlogPost } = useContext(Context); // access the value from context
+  // NOTE call it once
+  useEffect(() => {
+    getBlogPosts();
+    // NOTE anytime IndexScreen gains focus, the primary screen on this device,
+    // this call back function will be invoked
+    const listener = navigation.addListener("didFocus", () => {
+      getBlogPosts();
+    });
+
+    return () => {
+      listener.remove(); // clean up, solves memory leak issue
+    };
+  }, []);
 
   return (
     <View>
