@@ -1,8 +1,10 @@
 require("./models/User");
+require("./models/Track");
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRoutes");
+const trackRoutes = require("./routes/trackRoutes");
 const requireAuth = require("./middlewares/requireAuth");
 
 // app object, represents the entire application
@@ -13,6 +15,8 @@ app.use(bodyParser.json());
 
 // associates all the request handlers with the main express application
 app.use(authRoutes);
+
+app.use(trackRoutes);
 
 // mongodb+srv://admin:<password>@cluster0.scnz1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 const mongoUri =
